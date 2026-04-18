@@ -41,6 +41,11 @@ class SettingsNotifier extends StateNotifier<AppSettingsData> {
     state = state.copyWith(reminderOffsetHours: hours);
     await AppSettingsStorage.save(state);
   }
+
+  Future<void> setClipboardHintShown(bool shown) async {
+    state = state.copyWith(clipboardHintShown: shown);
+    await AppSettingsStorage.save(state);
+  }
 }
 
 final settingsProvider =

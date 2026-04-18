@@ -1,22 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/services/clipboard_service.dart';
+import '../../core/settings/settings_provider.dart';
+
 /// Bottom navigation shell wrapping the 4 tabs.
-class AppShell extends StatelessWidget {
+/// Also handles clipboard checking on launch and resume.
+class AppShell extends ConsumerStatefulWidget {
   const AppShell({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
 
   @override
+  ConsumerState<AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends ConsumerState<AppShell> {
+  late final AppLifecycleListener _lifecycleListener;
+  bool _initialCheckDone = false;
+  bool _isChecking = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _lifecycleListener = AppLifecycleListener(onResume: _onResume);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _handleInitialLaunch();
+    });
+  }
+
+  Future<void> _handleInitialLaunch() async {
+    if (_initialCheckDone) return;
+    _initialCheckDone = true;
+
+    final settings = ref.read(settingsProvider);
+    if (!mounted) return;
+
+    if (!settings.clipboardHintShown) {
+      await ClipboardService.showFirstLaunchHint(context, ref);
+    }
+
+    if (!mounted) return;
+    await _doClipboardCheck();
+  }
+
+  Future<void> _onResume() async {
+    if (!mounted || !_initialCheckDone) return;
+    await _doClipboardCheck();
+  }
+
+  Future<void> _doClipboardCheck() async {
+    if (_isChecking) return;
+    _isChecking = true;
+    try {
+      await ClipboardService.checkAndPrompt(context, ref);
+    } finally {
+      _isChecking = false;
+    }
+  }
+
+  @override
+  void dispose() {
+    _lifecycleListener.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: navigationShell,
+      body: widget.navigationShell,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
+        selectedIndex: widget.navigationShell.currentIndex,
         onDestinationSelected: (index) {
-          navigationShell.goBranch(
+          widget.navigationShell.goBranch(
             index,
-            initialLocation: index == navigationShell.currentIndex,
+            initialLocation: index == widget.navigationShell.currentIndex,
           );
         },
         destinations: const [

@@ -10,6 +10,7 @@ class AppSettingsData {
     this.hapticEnabled = true,
     this.reminderEnabled = false,
     this.reminderOffsetHours = 1,
+    this.clipboardHintShown = false,
   });
 
   final ThemeMode themeMode;
@@ -18,6 +19,7 @@ class AppSettingsData {
   final bool hapticEnabled;
   final bool reminderEnabled;
   final int reminderOffsetHours;
+  final bool clipboardHintShown;
 
   AppSettingsData copyWith({
     ThemeMode? themeMode,
@@ -26,6 +28,7 @@ class AppSettingsData {
     bool? hapticEnabled,
     bool? reminderEnabled,
     int? reminderOffsetHours,
+    bool? clipboardHintShown,
   }) {
     return AppSettingsData(
       themeMode: themeMode ?? this.themeMode,
@@ -34,6 +37,7 @@ class AppSettingsData {
       hapticEnabled: hapticEnabled ?? this.hapticEnabled,
       reminderEnabled: reminderEnabled ?? this.reminderEnabled,
       reminderOffsetHours: reminderOffsetHours ?? this.reminderOffsetHours,
+      clipboardHintShown: clipboardHintShown ?? this.clipboardHintShown,
     );
   }
 }
@@ -46,6 +50,7 @@ class AppSettingsStorage {
   static const _keyHapticEnabled = 'haptic_enabled';
   static const _keyReminderEnabled = 'reminder_enabled';
   static const _keyReminderOffset = 'reminder_offset';
+  static const _keyClipboardHintShown = 'clipboard_hint_shown';
 
   static Future<AppSettingsData> load() async {
     final prefs = await SharedPreferences.getInstance();
@@ -56,6 +61,7 @@ class AppSettingsStorage {
       hapticEnabled: prefs.getBool(_keyHapticEnabled) ?? true,
       reminderEnabled: prefs.getBool(_keyReminderEnabled) ?? false,
       reminderOffsetHours: prefs.getInt(_keyReminderOffset) ?? 1,
+      clipboardHintShown: prefs.getBool(_keyClipboardHintShown) ?? false,
     );
   }
 
@@ -67,6 +73,7 @@ class AppSettingsStorage {
     await prefs.setBool(_keyHapticEnabled, data.hapticEnabled);
     await prefs.setBool(_keyReminderEnabled, data.reminderEnabled);
     await prefs.setInt(_keyReminderOffset, data.reminderOffsetHours);
+    await prefs.setBool(_keyClipboardHintShown, data.clipboardHintShown);
   }
 
   static ThemeMode _parseThemeMode(String? value) {
@@ -89,5 +96,19 @@ class AppSettingsStorage {
       case ThemeMode.system:
         return 'system';
     }
+  }
+
+  // ── Enable65 flag (read before Riverpod container) ──
+
+  static const _keyEnable65 = 'enable_65';
+
+  static Future<bool> isEnable65Enabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_keyEnable65) ?? false;
+  }
+
+  static Future<void> setEnable65(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_keyEnable65, value);
   }
 }

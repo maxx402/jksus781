@@ -20,7 +20,6 @@ class ShuiheApp extends ConsumerWidget {
       darkTheme: AppTheme.dark(),
       themeMode: settings.themeMode,
       routerConfig: appRouter,
-      // Global iOS-style scroll behavior
       scrollBehavior: const _IOSScrollBehavior(),
     );
   }

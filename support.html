@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水赫手记 - 技术支持</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #09090b;
+    --muted: #71717a;
+    --border: #e4e4e7;
+    --card-bg: #fafafa;
+    --primary: #18181b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #09090b;
+      --fg: #fafafa;
+      --muted: #a1a1aa;
+      --border: #27272a;
+      --card-bg: #18181b;
+      --primary: #fafafa;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.8;
+    font-size: 15px;
+    padding: 0 16px;
+  }
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 0 80px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 36px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  p { margin-bottom: 12px; }
+  ul, ol {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  li { margin-bottom: 6px; }
+  a { color: var(--primary); }
+  .highlight-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .highlight-box p:last-child { margin-bottom: 0; }
+  .faq-item { margin-bottom: 24px; }
+  .faq-item h3 { margin-top: 0; }
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+  .footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>技术支持</h1>
+<p class="subtitle">水赫手记 &mdash; 个人效率与日常记录</p>
+
+<div class="highlight-box">
+<p>如果您在使用水赫手记的过程中遇到任何问题，请参考以下常见问题解答。若仍无法解决，请通过底部联系方式与我们取得联系，我们将尽快为您处理。</p>
+</div>
+
+<h2>功能介绍</h2>
+<p>水赫手记是一款集待办清单、备忘录、手记于一体的个人效率工具，主要功能包括：</p>
+<ul>
+  <li><strong>待办清单：</strong>创建和管理日常任务，支持置顶、标签、截止日期，完成时伴有音效与触觉反馈</li>
+  <li><strong>备忘录：</strong>快速记录碎片化信息，支持置顶、标签分类和全文搜索</li>
+  <li><strong>手记：</strong>以时间线形式记录日常感悟，可添加心情与天气标签，支持自动保存</li>
+  <li><strong>个性化设置：</strong>亮色/暗色/跟随系统主题、字体大小调节、音效与触觉反馈开关、数据导出与导入</li>
+</ul>
+
+<h2>常见问题</h2>
+
+<div class="faq-item">
+<h3>Q：数据存储在哪里？会丢失吗？</h3>
+<p>您的数据主要存储在设备本地数据库中，受操作系统沙盒保护。建议您定期使用「设置 → 数据管理 → 导出数据」功能进行备份，以防止意外数据丢失。</p>
+</div>
+
+<div class="faq-item">
+<h3>Q：如何备份和恢复数据？</h3>
+<p>进入「设置 → 数据管理」，点击「导出数据 (JSON)」即可将全部数据导出为文件。需要恢复时，点击「导入数据 (JSON)」选择之前导出的文件即可。</p>
+</div>
+
+<div class="faq-item">
+<h3>Q：如何切换主题模式？</h3>
+<p>进入「设置 → 外观 → 主题模式」，可选择亮色、暗色或跟随系统。</p>
+</div>
+
+<div class="faq-item">
+<h3>Q：完成待办时没有音效或震动？</h3>
+<p>请检查「设置 → 声音与反馈」中的开关是否已开启，同时确认设备未处于静音或勿扰模式。</p>
+</div>
+
+<div class="faq-item">
+<h3>Q：如何删除所有数据？</h3>
+<p>进入「设置 → 数据管理 → 清除所有数据」，确认后将删除全部待办、备忘和手记。<strong>此操作不可恢复</strong>，请提前备份重要数据。</p>
+</div>
+
+<div class="faq-item">
+<h3>Q：卸载应用后数据还在吗？</h3>
+<p>卸载应用将同时删除所有本地数据。如需保留，请在卸载前通过「导出数据」功能进行备份。</p>
+</div>
+
+<h2>系统要求</h2>
+<ul>
+  <li><strong>iOS：</strong>iOS 13.0 或更高版本</li>
+  <li><strong>Android：</strong>Android 5.0（API 21）或更高版本</li>
+</ul>
+
+<h2>联系我们</h2>
+<p>如果以上内容未能解决您的问题，请通过以下方式联系我们：</p>
+<div class="highlight-box">
+<p><strong>应用名称：</strong>水赫手记</p>
+<p><strong>开发者：</strong>水赫</p>
+<p><strong>技术支持邮箱：</strong>shuihe@shuiheshouji.com</p>
+<p>我们将在收到邮件后 48 小时内回复。</p>
+</div>
+
+<div class="footer">
+  <p><a href="https://kq84.cc/privacy.html">隐私政策</a></p>
+  <p>&copy; 2026 水赫手记 保留所有权利</p>
+</div>
+
+</div>
+</body>
+</html>

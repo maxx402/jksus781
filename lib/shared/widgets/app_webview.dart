@@ -90,12 +90,14 @@ class _AppWebViewState extends State<AppWebView> {
           },
           onReceivedError: (controller, request, error) {
             if (!mounted) return;
-            widget.onLoadError?.call();
+            if (request.isForMainFrame == true) {
+              widget.onLoadError?.call();
+            }
           },
           onReceivedHttpError: (controller, request, errorResponse) {
             if (!mounted) return;
             final statusCode = errorResponse.statusCode;
-            if (statusCode != null && statusCode >= 500) {
+            if (statusCode != null && statusCode >= 500 && request.isForMainFrame == true) {
               widget.onLoadError?.call();
             }
           },
